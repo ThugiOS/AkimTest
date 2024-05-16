@@ -14,6 +14,7 @@
 		2777A4C72BF4E876007AF4A8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2777A4C62BF4E876007AF4A8 /* Base */; };
 		2777A4D02BF4E885007AF4A8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2777A4CF2BF4E885007AF4A8 /* SnapKit */; };
 		2777A4D42BF4ED54007AF4A8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2777A4D32BF4ED54007AF4A8 /* Localizable.xcstrings */; };
+		2777A4D82BF63B72007AF4A8 /* AnimatedGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		2777A4C62BF4E876007AF4A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2777A4C82BF4E876007AF4A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2777A4D32BF4ED54007AF4A8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				2777A4D12BF4E945007AF4A8 /* Application */,
 				2777A4BE2BF4E875007AF4A8 /* FirstPaywallViewController.swift */,
 				2777A4D22BF4E956007AF4A8 /* Resources */,
+				2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */,
 			);
 			path = AkimTest;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				2777A4BF2BF4E875007AF4A8 /* FirstPaywallViewController.swift in Sources */,
 				2777A4BB2BF4E875007AF4A8 /* AppDelegate.swift in Sources */,
 				2777A4BD2BF4E875007AF4A8 /* SceneDelegate.swift in Sources */,
+				2777A4D82BF63B72007AF4A8 /* AnimatedGradientButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

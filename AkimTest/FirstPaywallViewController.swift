@@ -26,14 +26,14 @@ final class FirstPaywallViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private let continueButton: UIButton = {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = .red
-        $0.tintColor = .white
+    private let continueButton: AnimatedGradientButton = {
         $0.setTitle("Continue", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.layer.cornerRadius = 25
+        $0.clipsToBounds = true
         return $0
-    }(UIButton())
+    }(AnimatedGradientButton())
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -64,7 +64,9 @@ private extension FirstPaywallViewController {
         
         continueButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-30)
+            make.bottom.equalToSuperview().offset(-100)
+            make.width.equalTo(351)
+            make.height.equalTo(58)
         }
     }
 }
