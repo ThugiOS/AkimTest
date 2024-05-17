@@ -22,7 +22,7 @@ final class AnimatedGradientButton: UIButton {
     }
 
     private func setupButton() {
-        gradientLayer.colors = [UIColor.secondFirstPaywall.cgColor, UIColor.mainFirstPaywall.cgColor]
+        gradientLayer.colors = [UIColor.gradientFirstPaywall.cgColor, UIColor.mainFirstPaywall.cgColor]
 
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.7)
@@ -31,7 +31,7 @@ final class AnimatedGradientButton: UIButton {
 
         let animation = CABasicAnimation(keyPath: "colors")
         animation.fromValue = gradientLayer.colors
-        animation.toValue = [UIColor.mainFirstPaywall.cgColor, UIColor.secondFirstPaywall.cgColor]
+        animation.toValue = [UIColor.mainFirstPaywall.cgColor, UIColor.gradientFirstPaywall.cgColor]
         animation.duration = 3
         animation.autoreverses = true
         animation.repeatCount = Float.infinity

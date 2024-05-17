@@ -15,6 +15,9 @@
 		2777A4D02BF4E885007AF4A8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2777A4CF2BF4E885007AF4A8 /* SnapKit */; };
 		2777A4D42BF4ED54007AF4A8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2777A4D32BF4ED54007AF4A8 /* Localizable.xcstrings */; };
 		2777A4D82BF63B72007AF4A8 /* AnimatedGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */; };
+		2777A4E02BF654E6007AF4A8 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4DF2BF654E6007AF4A8 /* UIButton+Extension.swift */; };
+		2777A4E22BF65602007AF4A8 /* FirstPaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4E12BF65602007AF4A8 /* FirstPaywallViewModel.swift */; };
+		2777A4E42BF75BC0007AF4A8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4E32BF75BC0007AF4A8 /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		2777A4C82BF4E876007AF4A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2777A4D32BF4ED54007AF4A8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientButton.swift; sourceTree = "<group>"; };
+		2777A4DF2BF654E6007AF4A8 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		2777A4E12BF65602007AF4A8 /* FirstPaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPaywallViewModel.swift; sourceTree = "<group>"; };
+		2777A4E32BF75BC0007AF4A8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,10 @@
 		2777A4B92BF4E875007AF4A8 /* AkimTest */ = {
 			isa = PBXGroup;
 			children = (
+				2777A4DE2BF654C3007AF4A8 /* Extensions */,
+				2777A4DC2BF651DA007AF4A8 /* FirstPaywall */,
 				2777A4D12BF4E945007AF4A8 /* Application */,
-				2777A4BE2BF4E875007AF4A8 /* FirstPaywallViewController.swift */,
 				2777A4D22BF4E956007AF4A8 /* Resources */,
-				2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */,
 			);
 			path = AkimTest;
 			sourceTree = "<group>";
@@ -86,6 +92,33 @@
 				2777A4C82BF4E876007AF4A8 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2777A4DC2BF651DA007AF4A8 /* FirstPaywall */ = {
+			isa = PBXGroup;
+			children = (
+				2777A4DD2BF651F1007AF4A8 /* Views */,
+				2777A4BE2BF4E875007AF4A8 /* FirstPaywallViewController.swift */,
+				2777A4E12BF65602007AF4A8 /* FirstPaywallViewModel.swift */,
+			);
+			path = FirstPaywall;
+			sourceTree = "<group>";
+		};
+		2777A4DD2BF651F1007AF4A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2777A4D72BF63B72007AF4A8 /* AnimatedGradientButton.swift */,
+				2777A4E32BF75BC0007AF4A8 /* CustomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2777A4DE2BF654C3007AF4A8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2777A4DF2BF654E6007AF4A8 /* UIButton+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +200,10 @@
 			files = (
 				2777A4BF2BF4E875007AF4A8 /* FirstPaywallViewController.swift in Sources */,
 				2777A4BB2BF4E875007AF4A8 /* AppDelegate.swift in Sources */,
+				2777A4E22BF65602007AF4A8 /* FirstPaywallViewModel.swift in Sources */,
+				2777A4E42BF75BC0007AF4A8 /* CustomView.swift in Sources */,
 				2777A4BD2BF4E875007AF4A8 /* SceneDelegate.swift in Sources */,
+				2777A4E02BF654E6007AF4A8 /* UIButton+Extension.swift in Sources */,
 				2777A4D82BF63B72007AF4A8 /* AnimatedGradientButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
