@@ -20,6 +20,7 @@
 		2777A4E62BF8EA57007AF4A8 /* FirstPaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4E52BF8EA57007AF4A8 /* FirstPaywallButton.swift */; };
 		2777A4E82BFB4DB3007AF4A8 /* SecondPaywallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4E72BFB4DB3007AF4A8 /* SecondPaywallViewController.swift */; };
 		2777A4ED2BFB6B20007AF4A8 /* SecondPaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4EC2BFB6B20007AF4A8 /* SecondPaywallButton.swift */; };
+		2777A4EF2BFB8A9A007AF4A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		2777A4E52BF8EA57007AF4A8 /* FirstPaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPaywallButton.swift; sourceTree = "<group>"; };
 		2777A4E72BFB4DB3007AF4A8 /* SecondPaywallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPaywallViewController.swift; sourceTree = "<group>"; };
 		2777A4EC2BFB6B20007AF4A8 /* SecondPaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPaywallButton.swift; sourceTree = "<group>"; };
+		2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				2777A4BA2BF4E875007AF4A8 /* AppDelegate.swift */,
 				2777A4BC2BF4E875007AF4A8 /* SceneDelegate.swift */,
+				2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				2777A4BB2BF4E875007AF4A8 /* AppDelegate.swift in Sources */,
 				2777A4ED2BFB6B20007AF4A8 /* SecondPaywallButton.swift in Sources */,
 				2777A4E42BF75BC0007AF4A8 /* CustomView.swift in Sources */,
+				2777A4EF2BFB8A9A007AF4A8 /* Settings.swift in Sources */,
 				2777A4E82BFB4DB3007AF4A8 /* SecondPaywallViewController.swift in Sources */,
 				2777A4E62BF8EA57007AF4A8 /* FirstPaywallButton.swift in Sources */,
 				2777A4BD2BF4E875007AF4A8 /* SceneDelegate.swift in Sources */,

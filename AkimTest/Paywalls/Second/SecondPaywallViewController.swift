@@ -170,6 +170,7 @@ final class SecondPaywallViewController: UIViewController {
     @objc
     private func closeButtonTapped() {
         closeButton.animateButton()
+        Settings.setLastShownPaywall(.second)
     }
     
     @objc

@@ -155,6 +155,7 @@ final class FirstPaywallViewController: UIViewController {
     @objc
     private func closeButtonTapped() {
         closeButton.animateButton()
+        Settings.setLastShownPaywall(.first)
     }
     
     @objc
