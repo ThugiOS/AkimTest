@@ -9,6 +9,19 @@ import UIKit
 import SnapKit
 
 final class FirstPaywallViewController: UIViewController {
+    
+    // MARK: - Enums
+    private enum SelectedPlan {
+        case oneYear
+        case oneWeek
+    }
+    
+    // MARK: - Properties
+    private var selectedPlan: SelectedPlan = .oneYear {
+        didSet {
+            updateSelectedPlanUI()
+        }
+    }
 
     // MARK: - UI Components
     private let backgroundView: UIImageView = {
@@ -119,38 +132,45 @@ final class FirstPaywallViewController: UIViewController {
         oneWeekButton.addTarget(self, action: #selector(oneWeekButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - UI Update
+    private func updateSelectedPlanUI() {
+        switch selectedPlan {
+        case .oneYear:
+            oneYearButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+            oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+            bestChoiceView.backgroundColor = UIColor.mainFirstPaywall
+            
+            oneWeekButton.backgroundColor = UIColor.mainFirstPaywall
+            oneWeekButton.layer.borderColor = UIColor.clear.cgColor
+            oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+        case .oneWeek:
+            oneYearButton.layer.borderColor = UIColor.clear.cgColor
+            oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+            
+            oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+            oneWeekButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+        }
+    }
+    
     @objc
     private func continueButtonTapped() {
         continueButton.animateButton()
-        print("Continue button")
+        print("Continue with \(selectedPlan)")
     }
     
     @objc
     private func closeButtonTapped() {
         closeButton.animateButton()
-        print("Close button")
     }
     
     @objc
     private func oneWeekButtonTapped() {
-        print("One Week")
-        oneYearButton.layer.borderColor = UIColor.clear.cgColor
-        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
-        
-        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-        oneWeekButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+        selectedPlan = .oneWeek
     }
     
     @objc
     private func oneYearButtonTapped() {
-        print("One Year")
-        oneYearButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
-        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-        bestChoiceView.backgroundColor = UIColor.mainFirstPaywall
-        
-        oneWeekButton.backgroundColor = UIColor.mainFirstPaywall
-        oneWeekButton.layer.borderColor = UIColor.clear.cgColor
-        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+        selectedPlan = .oneYear
     }
 }
 
