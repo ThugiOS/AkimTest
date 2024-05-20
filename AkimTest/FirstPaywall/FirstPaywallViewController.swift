@@ -14,7 +14,12 @@ final class FirstPaywallViewController: UIViewController {
     private let backgroundView: UIImageView = {
         $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: "background")
-        $0.tintColor = .white
+        return $0
+    }(UIImageView())
+    
+    private let gradientView: UIImageView = {
+        $0.contentMode = .scaleAspectFill
+        $0.image = UIImage(named: "gradient")
         return $0
     }(UIImageView())
     
@@ -25,15 +30,31 @@ final class FirstPaywallViewController: UIViewController {
         return $0
     }(UIButton())
     
-//    private let mainLabel: UILabel = {
-//        $0.textColor = .white
-//        $0.textAlignment = .center
-//        $0.font = .systemFont(ofSize: 39, weight: .regular)
-//        $0.text = String(localized: "Get Premium Access")
-//        return $0
-//    }(UILabel())
-    
     private let mainLabel = CustomView()
+    
+    private let bestChoiceView: UIView = {
+        $0.backgroundColor = .mainFirstPaywall
+        $0.layer.cornerRadius = 8
+        return $0
+    }(UIView())
+
+    private let bestChoiceLabel: UILabel = {
+        $0.text = "Best choice"
+        $0.textColor = .white
+        $0.font = .systemFont(ofSize: 10, weight: .semibold)
+        return $0
+    }(UILabel())
+    
+    private let oneYearButton = PayButton(frame: .zero,
+                                          mainLabel: "1 year",
+                                          price: "$99.99",
+                                          borderColor: .mainFirstPaywall,
+                                          description: "7-day free trial")
+    
+    private let oneWeekButton = PayButton(frame: .zero,
+                                          mainLabel: "1 week",
+                                          price: "$2.99",
+                                          borderColor: .clear)
     
     private let continueButton: AnimatedGradientButton = {
         $0.setTitle("Continue", for: .normal)
@@ -68,7 +89,6 @@ final class FirstPaywallViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViews()
         setConstraints()
     }
@@ -76,16 +96,27 @@ final class FirstPaywallViewController: UIViewController {
     // MARK: - UI Setup
     private func setupViews() {
         view.addSubview(backgroundView)
+        view.addSubview(gradientView)
         view.addSubview(closeButton)
         view.addSubview(mainLabel)
-        view.addSubview(continueButton)
+        view.addSubview(oneYearButton)
+        view.addSubview(bestChoiceView)
+        bestChoiceView.addSubview(bestChoiceLabel)
+        view.addSubview(oneWeekButton)
         
+        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+        
+        view.addSubview(continueButton)
         view.addSubview(termsButton)
         view.addSubview(privacyButton)
         view.addSubview(restoreButton)
         
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        
+        oneYearButton.addTarget(self, action: #selector(oneYearButtonTapped), for: .touchUpInside)
+        oneWeekButton.addTarget(self, action: #selector(oneWeekButtonTapped), for: .touchUpInside)
     }
     
     @objc
@@ -99,6 +130,28 @@ final class FirstPaywallViewController: UIViewController {
         closeButton.animateButton()
         print("Close button")
     }
+    
+    @objc
+    private func oneWeekButtonTapped() {
+        print("One Week")
+        oneYearButton.layer.borderColor = UIColor.clear.cgColor
+        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+        
+        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+        oneWeekButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+    }
+    
+    @objc
+    private func oneYearButtonTapped() {
+        print("One Year")
+        oneYearButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+        bestChoiceView.backgroundColor = UIColor.mainFirstPaywall
+        
+        oneWeekButton.backgroundColor = UIColor.mainFirstPaywall
+        oneWeekButton.layer.borderColor = UIColor.clear.cgColor
+        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+    }
 }
 
 // MARK: - Constraints
@@ -108,17 +161,24 @@ private extension FirstPaywallViewController {
         
         let closeButtonTopOffset: Int
         let continueButtonBottomOffset: Int
+        let mainLabelTopOffset: Int
         
         if screenHeight <= 667 { // Height of iPhone SE
             closeButtonTopOffset = 30
+            mainLabelTopOffset = 150
             continueButtonBottomOffset = -55
         } else {
             closeButtonTopOffset = 59
+            mainLabelTopOffset = 372
             continueButtonBottomOffset = -75
         }
         
         backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        gradientView.snp.makeConstraints { make in
+            make.edges.equalTo(backgroundView)
         }
         
         closeButton.snp.makeConstraints { make in
@@ -128,7 +188,33 @@ private extension FirstPaywallViewController {
         }
         
         mainLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(mainLabelTopOffset)
+        }
+        
+        oneYearButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(21)
+            make.trailing.equalToSuperview().offset(-21)
+            make.height.equalTo(65)
+            make.bottom.equalTo(oneWeekButton.snp.top).offset(-10)
+        }
+        
+        bestChoiceView.snp.makeConstraints { make in
+            make.centerY.equalTo(oneYearButton.snp.top)
+            make.width.equalTo(80)
+            make.height.equalTo(14)
+            make.trailing.equalTo(oneYearButton).offset(-8)
+        }
+        
+        bestChoiceLabel.snp.makeConstraints { make in
+            make.center.equalTo(bestChoiceView)
+        }
+        
+        oneWeekButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(21)
+            make.trailing.equalToSuperview().offset(-21)
+            make.height.equalTo(65)
+            make.bottom.equalTo(continueButton.snp.top).offset(-10)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -138,7 +224,7 @@ private extension FirstPaywallViewController {
             make.trailing.equalTo(-21)
             make.height.equalTo(58)
         }
-        
+
         privacyButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(90)
