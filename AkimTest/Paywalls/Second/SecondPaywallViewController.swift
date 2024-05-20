@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  SecondPaywallViewController.swift
 //  AkimTest
 //
-//  Created by Никитин Артем on 15.05.24.
+//  Created by Никитин Артем on 20.05.24.
 //
 
 import UIKit
 import SnapKit
 
-final class FirstPaywallViewController: UIViewController {
+final class SecondPaywallViewController: UIViewController {
     // MARK: - Enums
     private enum SelectedPlan {
         case oneYear
@@ -21,19 +21,31 @@ final class FirstPaywallViewController: UIViewController {
             updateSelectedPlanUI()
         }
     }
-
+    
     // MARK: - UI Components
     private let backgroundView: UIImageView = {
-        $0.contentMode = .scaleAspectFill
-        $0.image = UIImage(named: "background")
+        $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "mainView")
         return $0
     }(UIImageView())
     
-    private let gradientView: UIImageView = {
-        $0.contentMode = .scaleAspectFill
-        $0.image = UIImage(named: "gradient")
+    private let mainLabel: UILabel = {
+        $0.textColor = .label
+        $0.textAlignment = .center
+        $0.font = .systemFont(ofSize: 39, weight: .regular)
+        $0.numberOfLines = 2
+        $0.text = String(localized: "Join the enjoyable learning")
         return $0
-    }(UIImageView())
+    }(UILabel())
+    
+    private let descriptionLabel: UILabel = {
+        $0.textColor = .label
+        $0.textAlignment = .center
+        $0.font = .systemFont(ofSize: 16, weight: .regular)
+        $0.numberOfLines = 3
+        $0.text = String(localized: "Enjoy the lessons with your favorite app.\nCancel anytime.")
+        return $0
+    }(UILabel())
     
     private let closeButton: UIButton = {
         $0.layer.cornerRadius = 21
@@ -42,14 +54,12 @@ final class FirstPaywallViewController: UIViewController {
         return $0
     }(UIButton())
     
-    private let mainLabel = CustomView()
-    
     private let bestChoiceView: UIView = {
-        $0.backgroundColor = .mainFirstPaywall
+        $0.backgroundColor = .mainSecondPaywall
         $0.layer.cornerRadius = 8
         return $0
     }(UIView())
-
+    
     private let bestChoiceLabel: UILabel = {
         $0.text = "Best choice"
         $0.textColor = .white
@@ -57,43 +67,44 @@ final class FirstPaywallViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private let oneYearButton = PayButton(frame: .zero,
-                                          mainLabel: "1 year",
-                                          price: "$99.99",
-                                          borderColor: .mainFirstPaywall,
-                                          description: "7-day free trial")
+    private let twelveMonthButton = SecondPaywallButton(frame: .zero,
+                                                        mainLabel: String(localized: "1 year"),
+                                                        price: String(localized: "$99.99"),
+                                                        descriptionPrice: String(localized: "$1.96 / week"),
+                                                        description: String(localized: "7-day free trial"))
     
-    private let oneWeekButton = PayButton(frame: .zero,
-                                          mainLabel: "1 week",
-                                          price: "$2.99",
-                                          borderColor: .clear)
+    private let twelveWeeksButton = SecondPaywallButton(frame: .zero,
+                                                        mainLabel: String(localized: "1 week"),
+                                                        price: String(localized: "$2.99"),
+                                                        descriptionPrice: String(localized: "$3.3 / week"))
     
-    private let continueButton: AnimatedGradientButton = {
-        $0.setTitle("Continue", for: .normal)
+    private let continueButton: UIButton = {
+        $0.setTitle(String(localized: "Continue"), for: .normal)
+        $0.backgroundColor = .mainSecondPaywall
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.layer.cornerRadius = 25
+        $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
         return $0
-    }(AnimatedGradientButton())
+    }(UIButton())
     
     private let termsButton: UIButton = {
-        $0.tintColor = .white
-        $0.setTitle("Terms", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.setTitle(String(localized: "Terms"), for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         return $0
     }(UIButton())
     
     private let privacyButton: UIButton = {
-        $0.tintColor = .white
-        $0.setTitle("Privacy", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.setTitle(String(localized: "Privacy"), for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         return $0
     }(UIButton())
     
     private let restoreButton: UIButton = {
-        $0.tintColor = .white
-        $0.setTitle("Restore", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.setTitle(String(localized: "Restore"), for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         return $0
     }(UIButton())
@@ -108,14 +119,16 @@ final class FirstPaywallViewController: UIViewController {
     
     // MARK: - UI Setup
     private func setupViews() {
+        view.backgroundColor = .white
+        
         view.addSubview(backgroundView)
-        view.addSubview(gradientView)
         view.addSubview(closeButton)
         view.addSubview(mainLabel)
-        view.addSubview(oneYearButton)
+        view.addSubview(descriptionLabel)
+        view.addSubview(twelveMonthButton)
         view.addSubview(bestChoiceView)
         bestChoiceView.addSubview(bestChoiceLabel)
-        view.addSubview(oneWeekButton)
+        view.addSubview(twelveWeeksButton)
         view.addSubview(continueButton)
         view.addSubview(termsButton)
         view.addSubview(privacyButton)
@@ -123,27 +136,28 @@ final class FirstPaywallViewController: UIViewController {
         
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        oneYearButton.addTarget(self, action: #selector(oneYearButtonTapped), for: .touchUpInside)
-        oneWeekButton.addTarget(self, action: #selector(oneWeekButtonTapped), for: .touchUpInside)
+        twelveMonthButton.addTarget(self, action: #selector(oneYearButtonTapped), for: .touchUpInside)
+        twelveWeeksButton.addTarget(self, action: #selector(oneWeekButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - UI Update
     private func updateSelectedPlanUI() {
         switch selectedPlan {
         case .oneYear:
-            oneYearButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
-            oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-            bestChoiceView.backgroundColor = UIColor.mainFirstPaywall
+            twelveMonthButton.layer.borderColor = UIColor.mainSecondPaywall.cgColor
+            twelveMonthButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+            bestChoiceView.backgroundColor = UIColor.mainSecondPaywall
             
-            oneWeekButton.backgroundColor = UIColor.mainFirstPaywall
-            oneWeekButton.layer.borderColor = UIColor.clear.cgColor
-            oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+            twelveWeeksButton.backgroundColor = UIColor.mainSecondPaywall
+            twelveWeeksButton.layer.borderColor = UIColor.borderSecondPaywall.cgColor
+            twelveWeeksButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
         case .oneWeek:
-            oneYearButton.layer.borderColor = UIColor.clear.cgColor
-            oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
+            twelveMonthButton.layer.borderColor = UIColor.borderSecondPaywall.cgColor
+            twelveMonthButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
             
-            oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-            oneWeekButton.layer.borderColor = UIColor.mainFirstPaywall.cgColor
+            twelveWeeksButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
+            twelveWeeksButton.layer.borderColor = UIColor.mainSecondPaywall.cgColor
+            bestChoiceView.backgroundColor = UIColor.borderSecondPaywall
         }
     }
     
@@ -170,62 +184,71 @@ final class FirstPaywallViewController: UIViewController {
 }
 
 // MARK: - Constraints
-private extension FirstPaywallViewController {
+private extension SecondPaywallViewController {
     func setConstraints() {
         let screenHeight = UIScreen.main.bounds.height
         
         let closeButtonTopOffset: Int
         let continueButtonBottomOffset: Int
-        let mainLabelTopOffset: Int
+        let mainViewTopOffset: Int
+        let mainViewLeadingTrailingOffset: Int
         
-        if screenHeight <= 667 { // Height of iPhone SE
+        if screenHeight <= 667 { // Height of iPhone 8, SE 2-3 etc.
             closeButtonTopOffset = 30
-            mainLabelTopOffset = 150
+            mainViewTopOffset = 0
+            mainViewLeadingTrailingOffset = 50
             continueButtonBottomOffset = -55
         } else {
             closeButtonTopOffset = 59
-            mainLabelTopOffset = 372
+            mainViewTopOffset = 102
+            mainViewLeadingTrailingOffset = 19
             continueButtonBottomOffset = -75
-        }
-        
-        backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        gradientView.snp.makeConstraints { make in
-            make.edges.equalTo(backgroundView)
         }
         
         closeButton.snp.makeConstraints { make in
             make.width.height.equalTo(42)
-            make.trailing.equalToSuperview().offset(-21)
+            make.leading.equalToSuperview().offset(21)
             make.top.equalToSuperview().offset(closeButtonTopOffset)
+        }
+        
+        backgroundView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(mainViewLeadingTrailingOffset)
+            make.trailing.equalToSuperview().offset(-mainViewLeadingTrailingOffset)
+            make.top.equalToSuperview().offset(mainViewTopOffset)
         }
         
         mainLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(mainLabelTopOffset)
+            make.bottom.equalTo(descriptionLabel.snp.top).offset(-8)
+            make.leading.equalTo(19)
+            make.trailing.equalTo(-19)
         }
         
-        oneYearButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(21)
-            make.trailing.equalToSuperview().offset(-21)
-            make.height.equalTo(65)
-            make.bottom.equalTo(oneWeekButton.snp.top).offset(-10)
+        descriptionLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(twelveMonthButton.snp.top).offset(-12)
+            make.leading.equalTo(19)
+            make.trailing.equalTo(-19)
         }
         
         bestChoiceView.snp.makeConstraints { make in
-            make.centerY.equalTo(oneYearButton.snp.top)
+            make.centerY.equalTo(twelveMonthButton.snp.top)
             make.width.equalTo(80)
             make.height.equalTo(14)
-            make.trailing.equalTo(oneYearButton).offset(-8)
+            make.trailing.equalTo(twelveMonthButton).offset(-8)
         }
         
         bestChoiceLabel.snp.makeConstraints { make in
             make.center.equalTo(bestChoiceView)
         }
         
-        oneWeekButton.snp.makeConstraints { make in
+        twelveMonthButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(21)
+            make.trailing.equalToSuperview().offset(-21)
+            make.height.equalTo(65)
+            make.bottom.equalTo(twelveWeeksButton.snp.top).offset(-10)
+        }
+        
+        twelveWeeksButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(21)
             make.trailing.equalToSuperview().offset(-21)
             make.height.equalTo(65)
@@ -239,7 +262,7 @@ private extension FirstPaywallViewController {
             make.trailing.equalTo(-21)
             make.height.equalTo(58)
         }
-
+        
         privacyButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(90)
@@ -262,3 +285,4 @@ private extension FirstPaywallViewController {
         }
     }
 }
+

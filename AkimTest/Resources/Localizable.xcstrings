@@ -1,10 +1,40 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "$1.96 / week" : {
+
+    },
+    "$2.99" : {
+
+    },
+    "$3.3 / week" : {
+
+    },
+    "$99.99" : {
+
+    },
+    "1 week" : {
+
+    },
+    "1 year" : {
+
+    },
+    "7-day free trial" : {
+
+    },
     "Automatic payment, cancel anytime" : {
 
     },
+    "Best choice" : {
+
+    },
+    "Continue" : {
+
+    },
     "Enjoy full access to advanced features" : {
+
+    },
+    "Enjoy the lessons with your favorite app.\nCancel anytime." : {
 
     },
     "Get Premium Access" : {
@@ -14,6 +44,18 @@
 
     },
     "In 7 days" : {
+
+    },
+    "Join the enjoyable learning" : {
+
+    },
+    "Privacy" : {
+
+    },
+    "Restore" : {
+
+    },
+    "Terms" : {
 
     },
     "Today" : {

@@ -1,5 +1,5 @@
 //
-//  PayButton.swift
+//  FirstPaywallButton.swift
 //  AkimTest
 //
 //  Created by Никитин Артем on 18.05.24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class PayButton: UIButton {
+final class FirstPaywallButton: UIButton {
     private let periodLabel: UILabel = {
         $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.textColor = .white
@@ -28,9 +28,9 @@ final class PayButton: UIButton {
         return $0
     }(UILabel())
     
-    init(frame: CGRect, mainLabel: String, price: String, borderColor: UIColor, description: String? = nil) {
+    init(frame: CGRect, mainLabel: String, price: String, description: String? = nil) {
         super.init(frame: frame)
-        setupViews(mainLabel: mainLabel, price: price, borderColor: borderColor, description: description)
+        setupViews(mainLabel: mainLabel, price: price, description: description)
     }
     
     @available(*, unavailable)
@@ -38,10 +38,9 @@ final class PayButton: UIButton {
         super.init(coder: aDecoder)
     }
     
-    private func setupViews(mainLabel: String, price: String, borderColor: UIColor, description: String?) {
+    private func setupViews(mainLabel: String, price: String, description: String?) {
         layer.cornerRadius = 10
         layer.borderWidth = 2
-        layer.borderColor = borderColor.cgColor
         
         addSubview(periodLabel)
         addSubview(priceLabel)
