@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class FirstPaywallViewController: UIViewController {
-    
     // MARK: - Enums
     private enum SelectedPlan {
         case oneYear
@@ -104,6 +103,7 @@ final class FirstPaywallViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setConstraints()
+        updateSelectedPlanUI()
     }
     
     // MARK: - UI Setup
@@ -116,10 +116,6 @@ final class FirstPaywallViewController: UIViewController {
         view.addSubview(bestChoiceView)
         bestChoiceView.addSubview(bestChoiceLabel)
         view.addSubview(oneWeekButton)
-        
-        oneYearButton.backgroundColor = UIColor.white.withAlphaComponent(0.06)
-        oneWeekButton.backgroundColor = UIColor.white.withAlphaComponent(0.17)
-        
         view.addSubview(continueButton)
         view.addSubview(termsButton)
         view.addSubview(privacyButton)
@@ -127,7 +123,6 @@ final class FirstPaywallViewController: UIViewController {
         
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        
         oneYearButton.addTarget(self, action: #selector(oneYearButtonTapped), for: .touchUpInside)
         oneWeekButton.addTarget(self, action: #selector(oneWeekButtonTapped), for: .touchUpInside)
     }
