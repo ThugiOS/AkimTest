@@ -42,7 +42,7 @@ final class FirstPaywallViewController: UIViewController {
         return $0
     }(UIButton())
     
-    private let mainLabel = CustomView()
+    private let mainLabel = MainInfoView()
     
     private let bestChoiceView: UIView = {
         $0.backgroundColor = .mainFirstPaywall

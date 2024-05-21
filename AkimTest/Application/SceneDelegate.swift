@@ -15,15 +15,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let lastShownPaywall = Settings.getLastShownPaywall()
+//        let lastShownPaywall = Settings.getLastShownPaywall()
+//        
+//        switch lastShownPaywall {
+//        case .first:
+//            window?.rootViewController = SecondPaywallViewController()
+//        case .second:
+//            window?.rootViewController = FirstPaywallViewController()
+//        }
         
-        switch lastShownPaywall {
-        case .first:
-            window?.rootViewController = SecondPaywallViewController()
-        case .second:
-            window?.rootViewController = FirstPaywallViewController()
-        }
-        
+        window?.rootViewController = MediaViewController()
         window?.makeKeyAndVisible()
     }
 }

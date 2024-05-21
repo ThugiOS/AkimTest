@@ -1,5 +1,5 @@
 //
-//  CustomView.swift
+//  MainInfoView.swift
 //  AkimTest
 //
 //  Created by Никитин Артем on 17.05.24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class CustomView: UIView {
+final class MainInfoView: UIView {
     private let mainLabel: UILabel = {
         $0.textColor = .white
         $0.textAlignment = .center
