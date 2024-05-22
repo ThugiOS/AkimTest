@@ -23,6 +23,9 @@
 		2777A4EF2BFB8A9A007AF4A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */; };
 		2787FF472BFC83B7009B1720 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF462BFC83B7009B1720 /* MediaViewController.swift */; };
 		2787FF492BFCC47C009B1720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF482BFCC47C009B1720 /* DetailViewController.swift */; };
+		2787FF4B2BFCD178009B1720 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF4A2BFCD178009B1720 /* NetworkManager.swift */; };
+		2787FF4E2BFCD1E1009B1720 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF4D2BFCD1E1009B1720 /* SDWebImage */; };
+		2787FF512BFCDAC6009B1720 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF502BFCDAC6009B1720 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,7 @@
 		2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		2787FF462BFC83B7009B1720 /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		2787FF482BFCC47C009B1720 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2787FF4A2BFCD178009B1720 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2787FF512BFCDAC6009B1720 /* Kingfisher in Frameworks */,
+				2787FF4E2BFCD1E1009B1720 /* SDWebImage in Frameworks */,
 				2777A4D02BF4E885007AF4A8 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +88,7 @@
 				2777A4D22BF4E956007AF4A8 /* Resources */,
 				2787FF462BFC83B7009B1720 /* MediaViewController.swift */,
 				2787FF482BFCC47C009B1720 /* DetailViewController.swift */,
+				2787FF4A2BFCD178009B1720 /* NetworkManager.swift */,
 			);
 			path = AkimTest;
 			sourceTree = "<group>";
@@ -178,6 +185,8 @@
 			name = AkimTest;
 			packageProductDependencies = (
 				2777A4CF2BF4E885007AF4A8 /* SnapKit */,
+				2787FF4D2BFCD1E1009B1720 /* SDWebImage */,
+				2787FF502BFCDAC6009B1720 /* Kingfisher */,
 			);
 			productName = AkimTest;
 			productReference = 2777A4B72BF4E875007AF4A8 /* AkimTest.app */;
@@ -209,6 +218,8 @@
 			mainGroup = 2777A4AE2BF4E875007AF4A8;
 			packageReferences = (
 				2777A4CE2BF4E885007AF4A8 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2787FF4C2BFCD1E1009B1720 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2787FF4F2BFCDAC6009B1720 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 2777A4B82BF4E875007AF4A8 /* Products */;
 			projectDirPath = "";
@@ -247,6 +258,7 @@
 				2777A4E62BF8EA57007AF4A8 /* FirstPaywallButton.swift in Sources */,
 				2787FF472BFC83B7009B1720 /* MediaViewController.swift in Sources */,
 				2777A4BD2BF4E875007AF4A8 /* SceneDelegate.swift in Sources */,
+				2787FF4B2BFCD178009B1720 /* NetworkManager.swift in Sources */,
 				2777A4E02BF654E6007AF4A8 /* UIButton+Extension.swift in Sources */,
 				2777A4D82BF63B72007AF4A8 /* AnimatedGradientButton.swift in Sources */,
 			);
@@ -481,6 +493,22 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		2787FF4C2BFCD1E1009B1720 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.2;
+			};
+		};
+		2787FF4F2BFCDAC6009B1720 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -488,6 +516,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2777A4CE2BF4E885007AF4A8 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		2787FF4D2BFCD1E1009B1720 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2787FF4C2BFCD1E1009B1720 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		2787FF502BFCDAC6009B1720 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2787FF4F2BFCDAC6009B1720 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

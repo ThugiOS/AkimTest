@@ -6,11 +6,18 @@
 //
 
 import UIKit
-import Photos
+import PhotosUI
 
 final class DetailViewController: UIViewController {
     
-    private let livePhotoView = UIImageView()
+    private let imageURL: URL
+    private let videoURL: URL
+    
+    private lazy var livePhotoView: PHLivePhotoView = {
+        let livePhotoView = PHLivePhotoView()
+        livePhotoView.contentMode = .scaleAspectFit
+        return livePhotoView
+    }()
     
     private let previewLivePhotoButton: UIButton = {
         $0.layer.cornerRadius = 10
@@ -30,13 +37,27 @@ final class DetailViewController: UIViewController {
         return $0
     }(UIButton())
     
+    init(imageURL: URL, videoURL: URL) {
+        self.imageURL = imageURL
+        self.videoURL = videoURL
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
+        print("\(imageURL.description)")
+        print("\(videoURL.description)")
         setupView()
         setConstraints()
     }
     
     private func setupView() {
+        view.backgroundColor = .white
         view.addSubview(livePhotoView)
         view.addSubview(previewLivePhotoButton)
         view.addSubview(saveLivePhotoButton)
