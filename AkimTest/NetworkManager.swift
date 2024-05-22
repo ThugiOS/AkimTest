@@ -6,31 +6,29 @@
 //
 
 import Foundation
+import Alamofire
 
-class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
     
     func fetchData(completion: @escaping ([MediaModel]?) -> Void) {
-
-        guard let url = URL(string: "https://wall.appthe.club") else {
-            completion(nil)
-            return
-        }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil else {
+        let url = "https://wall.appthe.club"
+        
+        AF.request(url).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decoder = JSONDecoder()
+                    let mediaData = try decoder.decode(MediaData.self, from: data)
+                    completion(mediaData.media)
+                } catch {
+                    completion(nil)
+                }
+            case .failure:
                 completion(nil)
-                return
             }
-            
-            do {
-                let decoder = JSONDecoder()
-                let mediaData = try decoder.decode(MediaData.self, from: data)
-                completion(mediaData.media)
-            } catch {
-                completion(nil)
-            }
-        }.resume()
+        }
     }
 }
 
@@ -42,4 +40,3 @@ struct MediaModel: Codable {
     let image: URL
     let video: URL
 }
-
