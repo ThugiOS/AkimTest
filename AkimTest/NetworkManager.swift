@@ -40,3 +40,17 @@ struct MediaModel: Codable {
     let image: URL
     let video: URL
 }
+
+
+//@objc
+//private func previewLivePhotoTapped() {
+//    let options = [PHLivePhotoRequestOptions()]
+//    PHLivePhoto.request(withResourceFileURLs: [videoURL, imageURL], placeholderImage: nil, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFit, resultHandler: { livePhoto, info in
+//        if let livePhoto {
+//            DispatchQueue.main.async {
+//                self.livePhotoView.livePhoto = livePhoto
+//                print("\(livePhoto.size)")
+//            }
+//        }
+//    })
+//}
