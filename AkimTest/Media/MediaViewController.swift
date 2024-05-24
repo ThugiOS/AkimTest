@@ -122,6 +122,8 @@ extension MediaViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let media = mediaArray[indexPath.item]
         let detailVC = DetailViewController(imageURL: media.image, videoURL: media.video)
+        detailVC.modalPresentationStyle = .fullScreen
+        detailVC.modalTransitionStyle = .crossDissolve
         present(detailVC, animated: true)
     }
 }

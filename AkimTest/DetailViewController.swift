@@ -10,25 +10,42 @@ import PhotosUI
 
 final class DetailViewController: UIViewController {
     
-    private let imageURL: URL // HEIC https://wall.appthe.club/media/2.HEIC
-    private let videoURL: URL // mov https://wall.appthe.club/media/2.mov
+    private let imageURL: URL // HEIC
+    private let videoURL: URL // MOV
+    private var localImageURL: URL?
+    private var localVideoURL: URL?
     private var livePhoto: PHLivePhoto?
     
     private lazy var livePhotoView: PHLivePhotoView = {
         let livePhotoView = PHLivePhotoView()
-        livePhotoView.contentMode = .scaleAspectFit
+        livePhotoView.contentMode = .scaleAspectFill
         return livePhotoView
     }()
     
-    private let previewLivePhotoButton: UIButton = {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = .red
-        $0.tintColor = .white
-        $0.setTitle("Preview", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        $0.isHidden = true
+    private let closeButton: UIButton = {
+        $0.layer.cornerRadius = 21
+        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.backgroundColor = .closeCircle
         return $0
     }(UIButton())
+    
+    private let previewLivePhotoButton: AnimatedGradientButton = {
+        $0.setTitle(String(localized: "Preview"), for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.layer.cornerRadius = 12
+        $0.clipsToBounds = true
+        return $0
+    }(AnimatedGradientButton())
+    
+    private let saveButton: AnimatedGradientButton = {
+        $0.setTitle(String(localized: "Save"), for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.layer.cornerRadius = 12
+        $0.clipsToBounds = true
+        return $0
+    }(AnimatedGradientButton())
     
     init(imageURL: URL, videoURL: URL) {
         self.imageURL = imageURL
@@ -45,53 +62,124 @@ final class DetailViewController: UIViewController {
 
         print(imageURL.description)
         print(videoURL.description)
+        
         setupView()
         setConstraints()
         
-        createLivePhoto()
+        downloadFiles()
     }
     
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(livePhotoView)
+        view.addSubview(closeButton)
         view.addSubview(previewLivePhotoButton)
+        view.addSubview(saveButton)
         
         previewLivePhotoButton.addTarget(self, action: #selector(previewLivePhotoTapped), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+    }
+    
+    private func downloadFiles() {
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        downloadFile(from: imageURL) { localURL in
+            if let localURL = localURL {
+                self.localImageURL = localURL
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        downloadFile(from: videoURL) { localURL in
+            if let localURL = localURL {
+                self.localVideoURL = localURL
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.createLivePhoto()
+        }
+    }
+    
+    private func downloadFile(from url: URL, completion: @escaping (URL?) -> Void) {
+        let task = URLSession.shared.downloadTask(with: url) { localURL, response, error in
+            guard let localURL = localURL, error == nil else {
+                print("Download error: \(String(describing: error))")
+                completion(nil)
+                return
+            }
+            
+            // Move the file to a permanent location
+            let fileManager = FileManager.default
+            let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let destinationURL = documentsURL.appendingPathComponent(url.lastPathComponent)
+            
+            do {
+                if fileManager.fileExists(atPath: destinationURL.path) {
+                    try fileManager.removeItem(at: destinationURL)
+                }
+                try fileManager.moveItem(at: localURL, to: destinationURL)
+                completion(destinationURL)
+            } catch {
+                print("File move error: \(error)")
+                completion(nil)
+            }
+        }
+        task.resume()
     }
     
     private func createLivePhoto() {
-        DispatchQueue.main.async {
-            // here you need to create a Live Photo
-            print("Live photo was created")
-            // If Live Photo was created, we make the previewLivePhotoButton active.
-            if self.livePhoto != nil {
-                self.previewLivePhotoButton.isHidden = false
+        guard let localImageURL = localImageURL, let localVideoURL = localVideoURL else {
+            print("Local URLs are not set")
+            return
+        }
+        
+        PHLivePhoto.request(withResourceFileURLs: [localImageURL, localVideoURL], placeholderImage: nil, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill) { (livePhoto, info) in
+            DispatchQueue.main.async {
+                self.livePhoto = livePhoto
+                self.livePhotoView.livePhoto = livePhoto
             }
         }
     }
     
     @objc
     private func previewLivePhotoTapped() {
-        if let livePhoto {
-            livePhotoView.livePhoto = livePhoto
-        }
+        print(localImageURL?.debugDescription)
+        print(localVideoURL?.debugDescription)
+        livePhotoView.startPlayback(with: .full)
+    }
+    @objc
+    private func closeButtonTapped() {
+        dismiss(animated: false)
     }
 }
 
 private extension DetailViewController {
     func setConstraints() {
         livePhotoView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(300)
+            make.edges.equalToSuperview()
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.top.equalToSuperview().offset(70)
         }
         
         previewLivePhotoButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(livePhotoView.snp.bottom)
-            make.width.equalTo(200)
+            make.bottom.equalToSuperview().offset(-50)
+            make.leading.equalToSuperview().offset(50)
             make.height.equalTo(44)
+            make.trailing.equalTo(saveButton.snp.leading).offset(-20)
+        }
+        
+        saveButton.snp.makeConstraints { make in
+            make.centerY.equalTo(previewLivePhotoButton)
+            make.trailing.equalToSuperview().offset(-50)
+            make.height.equalTo(44)
+            make.width.equalTo(70)
         }
     }
 }
-
-
