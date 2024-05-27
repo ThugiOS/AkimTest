@@ -98,7 +98,7 @@ final class DetailViewController: UIViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         saveLivePhotoButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
-        
+    
     // MARK: - Selectors
     @objc
     private func previewLivePhotoTapped() {
@@ -185,14 +185,14 @@ private extension DetailViewController {
             )
         }
     }
-
+    
     private func downloadFile(from url: URL, completion: @escaping (URL?) -> Void) {
         let destination: DownloadRequest.Destination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent(url.lastPathComponent)
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-
+        
         AF.download(url, to: destination).response { [weak self] response in
             guard self != nil else { return }
             switch response.result {
@@ -204,7 +204,7 @@ private extension DetailViewController {
             }
         }
     }
-
+    
     private func createLivePhoto() {
         guard let localImageURL = localImageURL, let localVideoURL = localVideoURL else {
             print("Local URLs are not set")

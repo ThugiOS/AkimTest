@@ -21,13 +21,14 @@
 		2777A4E82BFB4DB3007AF4A8 /* SecondPaywallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4E72BFB4DB3007AF4A8 /* SecondPaywallViewController.swift */; };
 		2777A4ED2BFB6B20007AF4A8 /* SecondPaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4EC2BFB6B20007AF4A8 /* SecondPaywallButton.swift */; };
 		2777A4EF2BFB8A9A007AF4A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */; };
-		2787FF472BFC83B7009B1720 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF462BFC83B7009B1720 /* MediaViewController.swift */; };
+		2787FF472BFC83B7009B1720 /* WallpaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF462BFC83B7009B1720 /* WallpaperViewController.swift */; };
 		2787FF492BFCC47C009B1720 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF482BFCC47C009B1720 /* DetailViewController.swift */; };
 		2787FF4B2BFCD178009B1720 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF4A2BFCD178009B1720 /* NetworkManager.swift */; };
 		2787FF4E2BFCD1E1009B1720 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF4D2BFCD1E1009B1720 /* SDWebImage */; };
 		2787FF542BFE19C4009B1720 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF532BFE19C4009B1720 /* Alamofire */; };
-		2787FF582BFE267E009B1720 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF572BFE267E009B1720 /* MediaCell.swift */; };
+		2787FF582BFE267E009B1720 /* WallpaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF572BFE267E009B1720 /* WallpaperCell.swift */; };
 		2787FF5F2C04944D009B1720 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF5E2C04944D009B1720 /* AmplitudeSwift */; };
+		2787FF612C04B20D009B1720 /* WallpaperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF602C04B20D009B1720 /* WallpaperModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,10 +47,11 @@
 		2777A4E72BFB4DB3007AF4A8 /* SecondPaywallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPaywallViewController.swift; sourceTree = "<group>"; };
 		2777A4EC2BFB6B20007AF4A8 /* SecondPaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPaywallButton.swift; sourceTree = "<group>"; };
 		2777A4EE2BFB8A9A007AF4A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		2787FF462BFC83B7009B1720 /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		2787FF462BFC83B7009B1720 /* WallpaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperViewController.swift; sourceTree = "<group>"; };
 		2787FF482BFCC47C009B1720 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2787FF4A2BFCD178009B1720 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		2787FF572BFE267E009B1720 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		2787FF572BFE267E009B1720 /* WallpaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperCell.swift; sourceTree = "<group>"; };
+		2787FF602C04B20D009B1720 /* WallpaperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +94,7 @@
 				2777A4DC2BF651DA007AF4A8 /* Paywalls */,
 				2777A4D22BF4E956007AF4A8 /* Resources */,
 				2787FF5B2C047956009B1720 /* Managers */,
-				2787FF592BFE27B0009B1720 /* Media */,
+				2787FF592BFE27B0009B1720 /* Wallpaper */,
 			);
 			path = AkimTest;
 			sourceTree = "<group>";
@@ -171,13 +173,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2787FF592BFE27B0009B1720 /* Media */ = {
+		2787FF592BFE27B0009B1720 /* Wallpaper */ = {
 			isa = PBXGroup;
 			children = (
-				2787FF462BFC83B7009B1720 /* MediaViewController.swift */,
-				2787FF572BFE267E009B1720 /* MediaCell.swift */,
+				2787FF462BFC83B7009B1720 /* WallpaperViewController.swift */,
+				2787FF572BFE267E009B1720 /* WallpaperCell.swift */,
+				2787FF602C04B20D009B1720 /* WallpaperModel.swift */,
 			);
-			path = Media;
+			path = Wallpaper;
 			sourceTree = "<group>";
 		};
 		2787FF5A2C0478E9009B1720 /* Detail */ = {
@@ -280,7 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2787FF582BFE267E009B1720 /* MediaCell.swift in Sources */,
+				2787FF582BFE267E009B1720 /* WallpaperCell.swift in Sources */,
+				2787FF612C04B20D009B1720 /* WallpaperModel.swift in Sources */,
 				2777A4BF2BF4E875007AF4A8 /* FirstPaywallViewController.swift in Sources */,
 				2777A4BB2BF4E875007AF4A8 /* AppDelegate.swift in Sources */,
 				2777A4ED2BFB6B20007AF4A8 /* SecondPaywallButton.swift in Sources */,
@@ -289,7 +293,7 @@
 				2777A4EF2BFB8A9A007AF4A8 /* Settings.swift in Sources */,
 				2777A4E82BFB4DB3007AF4A8 /* SecondPaywallViewController.swift in Sources */,
 				2777A4E62BF8EA57007AF4A8 /* FirstPaywallButton.swift in Sources */,
-				2787FF472BFC83B7009B1720 /* MediaViewController.swift in Sources */,
+				2787FF472BFC83B7009B1720 /* WallpaperViewController.swift in Sources */,
 				2777A4BD2BF4E875007AF4A8 /* SceneDelegate.swift in Sources */,
 				2787FF4B2BFCD178009B1720 /* NetworkManager.swift in Sources */,
 				2777A4E02BF654E6007AF4A8 /* UIButton+Extension.swift in Sources */,

@@ -9,34 +9,29 @@ import Foundation
 import Alamofire
 
 final class NetworkManager {
-    static let shared = NetworkManager()
+    static let shared = NetworkManager(); private init() {}
     
-    func fetchData(completion: @escaping ([MediaModel]?) -> Void) {
-        
-        let url = "https://wall.appthe.club"
+    let url = "https://wall.appthe.club"
+    
+    func fetchData(completion: @escaping (Result<[WallpaperModel], Error>) -> Void) {
         
         AF.request(url).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let mediaData = try decoder.decode(MediaData.self, from: data)
-                    completion(mediaData.media)
+                    let mediaData = try decoder.decode(WallpaperData.self, from: data)
+                    completion(.success(mediaData.media))
                 } catch {
-                    completion(nil)
+                    completion(.failure(error))
                 }
-            case .failure:
-                completion(nil)
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
 }
 
-struct MediaData: Codable {
-    let media: [MediaModel]
-}
-
-struct MediaModel: Codable {
-    let image: URL
-    let video: URL
+struct WallpaperData: Codable {
+    let media: [WallpaperModel]
 }

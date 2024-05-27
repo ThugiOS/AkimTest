@@ -1,5 +1,5 @@
 //
-//  MediaViewController.swift
+//  WallpaperViewController.swift
 //  AkimTest
 //
 //  Created by Никитин Артем on 21.05.24.
@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-final class MediaViewController: UIViewController {
+final class WallpaperViewController: UIViewController {
     
     // MARK: - Variables
-    private var mediaArray: [MediaModel] = []
+    private var mediaArray: [WallpaperModel] = []
     
     // MARK: - UI Components
     private let collectionView: UICollectionView = {
@@ -21,7 +21,7 @@ final class MediaViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.register(MediaCell.self, forCellWithReuseIdentifier: MediaCell.identifier)
+        collectionView.register(WallpaperCell.self, forCellWithReuseIdentifier: WallpaperCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
@@ -63,7 +63,7 @@ final class MediaViewController: UIViewController {
 }
 
 // MARK: - Constraints
-private extension MediaViewController {
+private extension WallpaperViewController {
     func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -72,21 +72,24 @@ private extension MediaViewController {
 }
 
 // MARK: - Network Call
-private extension MediaViewController {
+
+private extension WallpaperViewController {
     func fetchData() {
-        NetworkManager.shared.fetchData { [weak self] (media) in
+        NetworkManager.shared.fetchData { [weak self] result in
             DispatchQueue.main.async {
                 self?.refreshControl.endRefreshing()
             }
             
-            guard let self = self, let media = media else {
-                self?.showError()
-                return
-            }
+            guard let self = self else { return }
             
-            self.mediaArray = media
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            switch result {
+            case .success(let media):
+                self.mediaArray = media
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure:
+                self.showError()
             }
         }
     }
@@ -94,20 +97,21 @@ private extension MediaViewController {
     func showError() {
         let alert = UIAlertController(title: "Ooops", message: "Failed to fetch media data.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.present(alert, animated: true)
         }
     }
 }
 
 // MARK: - CollectionViewDataSource
-extension MediaViewController: UICollectionViewDataSource {
+extension WallpaperViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mediaArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as? MediaCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WallpaperCell.identifier, for: indexPath) as? WallpaperCell else {
             return UICollectionViewCell()
         }
         
@@ -118,7 +122,7 @@ extension MediaViewController: UICollectionViewDataSource {
 }
 
 // MARK: - CollectionViewDelegate
-extension MediaViewController: UICollectionViewDelegate {
+extension WallpaperViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let media = mediaArray[indexPath.item]
         let detailVC = DetailViewController(imageURL: media.image, videoURL: media.video)
@@ -128,7 +132,7 @@ extension MediaViewController: UICollectionViewDelegate {
     }
 }
 
-extension MediaViewController: UICollectionViewDelegateFlowLayout {
+extension WallpaperViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let widthScreen = UIScreen.main.bounds.width
         return CGSize(width: widthScreen * 0.9, height: widthScreen)

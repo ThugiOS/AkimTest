@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class MediaCell: UICollectionViewCell {
-    static let identifier = String(describing: MediaCell.self)
+final class WallpaperCell: UICollectionViewCell {
+    static let identifier = String(describing: WallpaperCell.self)
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()

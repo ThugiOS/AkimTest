@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            window?.rootViewController = FirstPaywallViewController()
 //        }
         
-        window?.rootViewController = MediaViewController()
+        window?.rootViewController = WallpaperViewController()
         window?.makeKeyAndVisible()
     }
 }
