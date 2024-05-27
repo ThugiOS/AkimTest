@@ -8,6 +8,7 @@
 import UIKit
 import PhotosUI
 import Alamofire
+import AmplitudeSwift
 
 final class DetailViewController: UIViewController {
     
@@ -17,6 +18,12 @@ final class DetailViewController: UIViewController {
     private var localImageURL: URL?
     private var localVideoURL: URL?
     private var livePhoto: PHLivePhoto?
+    
+    private let amplitude = Amplitude(
+        configuration: Configuration(
+            apiKey: "57a1f30bd8288c66d25348192b0f0551"
+        )
+    )
     
     // MARK: - UI Components
     private lazy var livePhotoView: PHLivePhotoView = {
@@ -95,6 +102,9 @@ final class DetailViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func previewLivePhotoTapped() {
+        amplitude.track(
+            eventType: "wallpaper_screen_action"
+        )
         previewLivePhotoButton.animateButton()
         livePhotoView.startPlayback(with: .full)
     }
@@ -107,6 +117,9 @@ final class DetailViewController: UIViewController {
     
     @objc
     private func saveButtonTapped() {
+        amplitude.track(
+            eventType: "wallpaper_download"
+        )
         saveLivePhotoButton.animateButton()
         saveLivePhotoToLibrary()
     }
@@ -167,6 +180,9 @@ private extension DetailViewController {
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
             self.createLivePhoto()
+            self.amplitude.track(
+                eventType: "wallpaper_screen_view"
+            )
         }
     }
 

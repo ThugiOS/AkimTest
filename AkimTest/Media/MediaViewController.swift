@@ -124,7 +124,7 @@ extension MediaViewController: UICollectionViewDelegate {
         let detailVC = DetailViewController(imageURL: media.image, videoURL: media.video)
         detailVC.modalPresentationStyle = .fullScreen
         detailVC.modalTransitionStyle = .crossDissolve
-        present(detailVC, animated: true)
+        present(detailVC, animated: false)
     }
 }
 

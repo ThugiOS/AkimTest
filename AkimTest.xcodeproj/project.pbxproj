@@ -27,6 +27,7 @@
 		2787FF4E2BFCD1E1009B1720 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF4D2BFCD1E1009B1720 /* SDWebImage */; };
 		2787FF542BFE19C4009B1720 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF532BFE19C4009B1720 /* Alamofire */; };
 		2787FF582BFE267E009B1720 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787FF572BFE267E009B1720 /* MediaCell.swift */; };
+		2787FF5F2C04944D009B1720 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2787FF5E2C04944D009B1720 /* AmplitudeSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2787FF5F2C04944D009B1720 /* AmplitudeSwift in Frameworks */,
 				2787FF542BFE19C4009B1720 /* Alamofire in Frameworks */,
 				2787FF4E2BFCD1E1009B1720 /* SDWebImage in Frameworks */,
 				2777A4D02BF4E885007AF4A8 /* SnapKit in Frameworks */,
@@ -214,6 +216,7 @@
 				2777A4CF2BF4E885007AF4A8 /* SnapKit */,
 				2787FF4D2BFCD1E1009B1720 /* SDWebImage */,
 				2787FF532BFE19C4009B1720 /* Alamofire */,
+				2787FF5E2C04944D009B1720 /* AmplitudeSwift */,
 			);
 			productName = AkimTest;
 			productReference = 2777A4B72BF4E875007AF4A8 /* AkimTest.app */;
@@ -248,6 +251,7 @@
 				2787FF4C2BFCD1E1009B1720 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				2787FF4F2BFCDAC6009B1720 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				2787FF522BFE19C4009B1720 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2787FF5D2C04944D009B1720 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 			);
 			productRefGroup = 2777A4B82BF4E875007AF4A8 /* Products */;
 			projectDirPath = "";
@@ -548,6 +552,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		2787FF5D2C04944D009B1720 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -565,6 +577,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2787FF522BFE19C4009B1720 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		2787FF5E2C04944D009B1720 /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2787FF5D2C04944D009B1720 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
+			productName = AmplitudeSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
