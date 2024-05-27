@@ -85,12 +85,12 @@
 			isa = PBXGroup;
 			children = (
 				2777A4D12BF4E945007AF4A8 /* Application */,
+				2787FF5A2C0478E9009B1720 /* Detail */,
 				2777A4DE2BF654C3007AF4A8 /* Extensions */,
 				2777A4DC2BF651DA007AF4A8 /* Paywalls */,
 				2777A4D22BF4E956007AF4A8 /* Resources */,
+				2787FF5B2C047956009B1720 /* Managers */,
 				2787FF592BFE27B0009B1720 /* Media */,
-				2787FF482BFCC47C009B1720 /* DetailViewController.swift */,
-				2787FF4A2BFCD178009B1720 /* NetworkManager.swift */,
 			);
 			path = AkimTest;
 			sourceTree = "<group>";
@@ -176,6 +176,22 @@
 				2787FF572BFE267E009B1720 /* MediaCell.swift */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		2787FF5A2C0478E9009B1720 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2787FF482BFCC47C009B1720 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		2787FF5B2C047956009B1720 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2787FF4A2BFCD178009B1720 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
