@@ -26,6 +26,13 @@ final class DetailViewController: UIViewController {
     )
     
     // MARK: - UI Components
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .mainFirstPaywall
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+
     private lazy var livePhotoView: PHLivePhotoView = {
         let livePhotoView = PHLivePhotoView()
         livePhotoView.contentMode = .scaleAspectFill
@@ -50,6 +57,7 @@ final class DetailViewController: UIViewController {
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
         $0.layer.shadowRadius = 4
         $0.layer.masksToBounds = false
+        $0.isHidden = true
         return $0
     }(UIButton())
     
@@ -64,6 +72,7 @@ final class DetailViewController: UIViewController {
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
         $0.layer.shadowRadius = 4
         $0.layer.masksToBounds = false
+        $0.isHidden = true
         return $0
     }(UIButton())
     
@@ -93,6 +102,8 @@ final class DetailViewController: UIViewController {
         view.addSubview(closeButton)
         view.addSubview(previewLivePhotoButton)
         view.addSubview(saveLivePhotoButton)
+        view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
         
         previewLivePhotoButton.addTarget(self, action: #selector(previewLivePhotoTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
@@ -136,6 +147,10 @@ private extension DetailViewController {
             make.leading.equalToSuperview().offset(24)
             make.top.equalToSuperview().offset(70)
             make.height.width.equalTo(44)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
         previewLivePhotoButton.snp.makeConstraints { make in
@@ -214,7 +229,10 @@ private extension DetailViewController {
         PHLivePhoto.request(withResourceFileURLs: [localImageURL, localVideoURL], placeholderImage: nil, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill) { (livePhoto, info) in
             DispatchQueue.main.async {
                 self.livePhoto = livePhoto
+                self.activityIndicator.stopAnimating()
                 self.livePhotoView.livePhoto = livePhoto
+                self.previewLivePhotoButton.isHidden = false
+                self.saveLivePhotoButton.isHidden = false
             }
         }
     }
