@@ -171,6 +171,10 @@ final class SecondPaywallViewController: UIViewController {
     private func closeButtonTapped() {
         closeButton.animateButton()
         Settings.setLastShownPaywall(.second)
+        let wallpaperVC = WallpaperViewController()
+        wallpaperVC.modalPresentationStyle = .fullScreen
+        wallpaperVC.modalTransitionStyle = .crossDissolve
+        present(wallpaperVC, animated: true, completion: nil)
     }
     
     @objc
