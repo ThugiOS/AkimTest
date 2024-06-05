@@ -23,7 +23,7 @@
       <img src="https://github.com/ThugiOS/AkimTest/blob/main/media/1pay.gif" width="320"> <img src="https://github.com/ThugiOS/AkimTest/blob/main/media/2pay.gif" width="320">
 </p>
 
-2) Список данных: Реализован UICollectionView, в котором отображены данные с API. Список обновляться при каждом открытии экрана. Добавлен UIRefreshControl. Фото кэшируется SDWebImage
+2) Список данных: Реализован UICollectionView, в котором отображены данные из API. Список обновляться при каждом открытии экрана. Добавлен UIRefreshControl. Фото кэшируется SDWebImage
  <img src="https://github.com/ThugiOS/AkimTest/blob/main/media/api.png" width="480">
  
 3) Live Photo: При нажатии на элемент из списка мы переходим на Detail экран. Из полученных image/video создается Live Photo и отображается на экране. запускается анимация при нажатии кнопки Preview или Haptic Touch. Также можно сохранить Live Photo в галерею.
